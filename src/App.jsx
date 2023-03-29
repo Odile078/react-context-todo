@@ -1,9 +1,7 @@
+import MainContent from "./components/MainContent";
+
 function App() {
-  return (
-    <div>
-      <h1 className="font-bold">To do app</h1>
-    </div>
-  );
+  return <MainContent />;
 }
 
 export default App;
