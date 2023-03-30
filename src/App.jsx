@@ -1,7 +1,12 @@
 import MainContent from "./components/MainContent";
+import TaskContextProvider from "./context/TaskContextProvider";
 
 function App() {
-  return <MainContent />;
+  return (
+    <TaskContextProvider>
+      <MainContent />
+    </TaskContextProvider>
+  );
 }
 
 export default App;

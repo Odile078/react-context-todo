@@ -1,43 +1,21 @@
+import { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 import { TbBallpen, TbBallpenOff } from "react-icons/tb";
-const TaskCard = ({ taskIndex, task, tasks, setTasks }) => {
-  const deleteTask = (selectedTaskId) => {
-    let newTasksArray = tasks.filter((task) => task.id !== selectedTaskId);
-    console.log("new tasks:", newTasksArray);
-    setTasks(newTasksArray);
-  };
-  const handleMarkTaskDone = (selectedTaskId) => {
-    let newTasksArray = tasks.map((task, index) => {
-      if (task.id === selectedTaskId) {
-        const newTask = { ...task, checked: !task.checked };
-        task = newTask;
-        return newTask;
-      } else return task;
-    });
+import { TaskContext } from "../context/TaskContextProvider";
 
-    setTasks(newTasksArray);
-  };
-  const handleEnableEditing = (taskId) => {
-    let newTasksArray = tasks.map((task, index) => {
-      if (task.id === taskId) {
-        const newTask = { ...task, isEditing: !task.isEditing };
-        return newTask;
-      } else return task;
-    });
-    setTasks(newTasksArray);
-  };
+const TaskCard = ({ taskIndex, task }) => {
+  const { enableEditing, updateTask, markTaskDone, deleteTask } =
+    useContext(TaskContext);
+
+  const handleEnableEditing = (taskId) => enableEditing(taskId);
   const handleUpdateTask = (e, taskId) => {
     const newValue = e.target.value;
     if (!newValue.trim()) return;
-    let newTasksArray = tasks.map((task, index) => {
-      if (task.id === taskId) {
-        const newTask = { ...task, value: newValue, isEditing: false };
-        return newTask;
-      } else return task;
-    });
-    setTasks(newTasksArray);
+    updateTask(taskId, newValue);
   };
-  console.log("tasks:", tasks);
+  const handleMarkTaskDone = (selectedTaskId) => markTaskDone(selectedTaskId);
+  const handleDeleteTask = (selectedTaskId) => deleteTask(selectedTaskId);
+
   return (
     <div className="flex gap-6 justify-between flex-wrap sm:flex-nowrap border-b border-gray-200 py-2">
       <div className="flex-1 flex gap-2 w-4/5">
@@ -93,14 +71,14 @@ const TaskCard = ({ taskIndex, task, tasks, setTasks }) => {
           </div>
         ) : (
           <div className="flex gap-1 items-center ">
-            <p className="text-white  text-xs">Edit</p>
+            <p className="text-white text-xs">Edit</p>
             <TbBallpen className="text-white text-xs" />
           </div>
         )}
       </button>
       <button
         className="p-3 bg-gray-100 rounded-full h-fit "
-        onClick={() => deleteTask(task.id)}
+        onClick={() => handleDeleteTask(task.id)}
       >
         <FaTrash className="text-red-600" />
       </button>

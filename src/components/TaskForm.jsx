@@ -1,28 +1,23 @@
-import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { TaskContext } from "../context/TaskContextProvider";
 
-const TaskForm = ({ tasks, setTasks }) => {
+const TaskForm = () => {
   const [taskInput, setTaskInput] = useState("");
+  const { createTask } = useContext(TaskContext);
+
   const handleChangTaskInput = (e) => setTaskInput(e.target.value);
-  const addTask = (e) => {
+  const handleSubmitForm = (e) => {
     e?.preventDefault();
     if (!taskInput.trim()) return;
-    let taskArray = tasks.slice();
-    taskArray.push({
-      id: nanoid(),
-      value: taskInput,
-      checked: false,
-      isEditing: false,
-    });
-    setTasks(taskArray);
+    createTask(taskInput);
     setTaskInput("");
   };
 
   return (
     <form
-      className="rounded-3xl  shadow-lg border-2 border-gray-300 flex py-4 px-10"
-      onSubmit={addTask}
+      className="rounded-3xl shadow-lg border-2 border-gray-300 flex py-4 px-10"
+      onSubmit={handleSubmitForm}
     >
       <div className="flex flex-1">
         <label for="new task" className="sr-only">
@@ -39,10 +34,10 @@ const TaskForm = ({ tasks, setTasks }) => {
       </div>
       <button
         type="button"
-        onClick={addTask}
-        className=" bg-teal-500 rounded-full p-2"
+        onClick={handleSubmitForm}
+        className="bg-teal-500 rounded-full p-2"
       >
-        <FaPlus className=" text-white text-base" />
+        <FaPlus className="text-white text-base" />
       </button>
     </form>
   );
