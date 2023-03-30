@@ -14,7 +14,7 @@ A to do app implemented using React and Context API.
 
 - Access your terminal
 
-- Clone it in your repository`https://github.com/Odile078/react-redux--todo.git`
+- Clone it in your repository`https://github.com/Odile078/react-context-todo.git`
 
 - Or, You can download the zip folder
 
@@ -33,7 +33,7 @@ Run the development server:
 1. Clone the project
 
 ```bash
-git clone https://github.com/Odile078/react-redux--todo.git
+git clone https://github.com/Odile078/react-context-todo.git
 ```
 
 2. Install packages
