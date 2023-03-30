@@ -1,8 +1,6 @@
 import TaskForm from "./TaskForm";
 import TaskCard from "./TaskCard";
-import TaskContextProvider, {
-  TaskContext,
-} from "../context/TaskContextProvider";
+import { TaskContext } from "../context/TaskContextProvider";
 import { useContext } from "react";
 
 const MainContent = () => {
