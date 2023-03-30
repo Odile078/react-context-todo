@@ -1,12 +1,20 @@
+import { nanoid } from "nanoid";
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 
-const TaskForm = ({ tasks, setTasks, taskInput, setTaskInput }) => {
+const TaskForm = ({ tasks, setTasks }) => {
+  const [taskInput, setTaskInput] = useState("");
   const handleChangTaskInput = (e) => setTaskInput(e.target.value);
   const addTask = (e) => {
     e?.preventDefault();
     if (!taskInput.trim()) return;
     let taskArray = tasks.slice();
-    taskArray.push({ checked: false, value: taskInput });
+    taskArray.push({
+      id: nanoid(),
+      value: taskInput,
+      checked: false,
+      isEditing: false,
+    });
     setTasks(taskArray);
     setTaskInput("");
   };
