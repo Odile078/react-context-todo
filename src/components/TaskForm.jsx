@@ -6,9 +6,9 @@ const TaskForm = () => {
   const [taskInput, setTaskInput] = useState("");
   const { createTask } = useContext(TaskContext);
 
-  const handleChangTaskInput = (e) => setTaskInput(e.target.value);
-  const handleSubmitForm = (e) => {
-    e?.preventDefault();
+  const handleChangTaskInput = (event) => setTaskInput(event.target.value);
+  const handleSubmitForm = (event) => {
+    event?.preventDefault();
     if (!taskInput.trim()) return;
     createTask(taskInput);
     setTaskInput("");

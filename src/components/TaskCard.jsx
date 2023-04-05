@@ -8,8 +8,8 @@ const TaskCard = ({ taskIndex, task }) => {
     useContext(TaskContext);
 
   const handleEnableEditing = (taskId) => enableEditing(taskId);
-  const handleUpdateTask = (e, taskId) => {
-    const newValue = e.target.value;
+  const handleUpdateTask = (event, taskId) => {
+    const newValue = event.target.value;
     if (!newValue.trim()) return;
     updateTask(taskId, newValue);
   };
@@ -24,7 +24,6 @@ const TaskCard = ({ taskIndex, task }) => {
             <input
               type="checkbox"
               id={`checkbox${+1} ${taskIndex}`}
-              value=""
               checked={task.checked ? true : false}
               onChange={() => handleMarkTaskDone(task.id)}
               aria-label="..."
@@ -46,7 +45,7 @@ const TaskCard = ({ taskIndex, task }) => {
                 placeholder="Edit your task"
                 className="outline-none focus:outline-none break-words w-11/12 border border-gray-200 p-2"
                 defaultValue={task.value}
-                onBlur={(e) => handleUpdateTask(e, task.id)}
+                onBlur={(event) => handleUpdateTask(event, task.id)}
               />
             </div>
           ) : (

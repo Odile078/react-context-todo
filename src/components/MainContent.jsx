@@ -15,7 +15,7 @@ const MainContent = () => {
           <div className="flex flex-col gap-4">
             {tasks.length > 0 ? (
               tasks.map((task, index) => (
-                <TaskCard key={index} taskIndex={index} task={task} />
+                <TaskCard key={task.id} taskIndex={index} task={task} />
               ))
             ) : (
               <p className="font-bold text-3xl text-gray-600">
